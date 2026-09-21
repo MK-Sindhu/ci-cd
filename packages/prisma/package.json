@@ -1,0 +1,23 @@
+{
+  "name": "@repo/db",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "@prisma/cli-engine": "0.4.0",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "26.4.1",
+    "prisma": "8.0.0-rc.15"
+  },
+  "license": "ISC",
+  "description": "",
+  "scripts": {
+    "contract:emit": "prisma contract emit"
+  },
+  "dependencies": {
+    "@prisma/orm-postgres": "8.0.0-rc.11",
+    "dotenv": "^18.0.1"
+  }
+}
