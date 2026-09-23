@@ -1,0 +1,27 @@
+name: deploy to staging
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  redeploy_everything:
+    name: redeploy everything to the staging cluster
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH into the server and redeploy
+        run: |
+          echo "${{ secrets.KEY_PAIR_1 }}" > ~/ssh_key
+          chmod 600 ~/ssh_key
+          ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@13.60.254.25 '
+            set -e
+            export PATH="$HOME/.nvm/versions/node/v24.21.0/bin:$PATH"
+            cd ~/ci-cd/
+            git fetch origin
+            git reset --hard origin/main
+            pnpm install
+            pnpm run build
+            pm2 restart all
+            pm2 save
+          '
