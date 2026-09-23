@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <div>
-      {user?.username}
+      NAME: {user?.username}
     </div>
   );
 }
