@@ -4,6 +4,7 @@ on:
     branches:
       - main
 
+      
 jobs:
   redeploy_everything:
     name: redeploy everything to the staging cluster
@@ -12,7 +13,7 @@ jobs:
     steps:
       - name: SSH into the server and redeploy
         run: |
-          echo "${{ secrets.KEY_PAIR_1 }}" > ~/ssh_key
+          echo "${{ secrets.KEY_PAIR_1 }}" | base64 -d > ~/ssh_key
           chmod 600 ~/ssh_key
           ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@13.60.254.25 '
             set -e
